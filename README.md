@@ -16,8 +16,9 @@ Endlessly reads RFID card tokens (serially from /dev/ttyUSB0) and pushes the val
 Tested on a Raspberry Pi with a Sparkfun RFID USB Reader SEN-09963
 
 ## To compile
-- first compile hiredis https://github.com/antirez/hiredis
+- first get and compile the hiredis c library https://github.com/antirez/hiredis
 - then compile this program and link it with libhiredis.a
+
 ```sh
 $cc -o redis-rfid-serial redis-rfid-serial.c libhiredis.a
 ```
