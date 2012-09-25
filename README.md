@@ -7,7 +7,7 @@ This is a set of software tools used in a Raspberry Pi RFID enabled Kiosk.
 - running chromium in kiosk mode as a single .xinitrc program browsing localhost (see example.xinitrc)
 - getting RFID id and store it locally (see redis-rfid-serial.c)
 - use thr locally stored rfid, add some other values on a web form (see example-ajax.html)
-- send data via web-service to a remote (ADempiere) server
+- send data via web-service to a remote (ADempiere) server (todo)
 
 
 ## Files
