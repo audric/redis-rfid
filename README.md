@@ -13,23 +13,26 @@ This is a set of software tools used in a Raspberry Pi RFID enabled Kiosk.
 ## Files
 ### redis-rfid-serial
 Endlessly reads RFID card tokens (serially from /dev/ttyUSB0) and pushes the value into redis with name rfidcard.
-Tested on a Raspberry Pi with a Sparkfun RFID USB Reader SEN-09963
+Tested on a Raspberry Pi (1) with a Sparkfun RFID USB Reader SEN-09963 (2)
+
+1. http://www.raspberrypi.org/
+2. https://www.sparkfun.com/products/9963
 
 ## To compile
 - first get and compile the hiredis c library https://github.com/antirez/hiredis
 - then compile this program and link it with libhiredis.a
 
 ```sh
-$cc -o redis-rfid-serial redis-rfid-serial.c libhiredis.a
+$ cc -o redis-rfid-serial redis-rfid-serial.c libhiredis.a
 ```
 
 ## To test
 ```sh
 $ ./redis-rfid-serial &
 ```
-then swipe come rfid card or tag on the reader and check
+then swipe some rfid card or tag on the reader and check
 ```sh
-$redis-cli get rfidcard
+$ redis-cli get rfidcard
 ```
 
 ## Todo
