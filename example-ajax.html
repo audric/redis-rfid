@@ -1,0 +1,29 @@
+<html>
+
+<script>
+
+function mywatch() {
+
+    var xmlhttp;
+    xmlhttp=new XMLHttpRequest();
+    // for the time being we are using webdis
+    xmlhttp.open("GET","http://127.0.0.1:7379/GET/rfidcard.txt",true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange=function()
+    {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	{
+	    document.getElementById("inputOperatore").value=xmlhttp.responseText;
+	}
+    }
+}
+
+</script>
+
+<body onLoad="setInterval('mywatch();',500);">
+
+<input type="text" id="inputOperatore" size=50>
+
+</body>
+</html>
+
