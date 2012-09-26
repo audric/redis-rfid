@@ -48,7 +48,7 @@ __END__
       function mywatch() {
        var xmlhttp;
        xmlhttp=new XMLHttpRequest();
-       xmlhttp.open("GET","http://10.16.0.149:4567/redis/get/rfidcard",true);
+       xmlhttp.open("GET","http://127.0.0.1:4567/redis/get/rfidcard",true);
        xmlhttp.send();
        xmlhttp.onreadystatechange=function()
        {
