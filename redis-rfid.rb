@@ -13,7 +13,7 @@ end
 
 get '/' do
   @temperature = %x(/opt/vc/bin/vcgencmd measure_temp)
-  @rfidcard = REDIS.get('rfidcard')
+#  @rfidcard = REDIS.get('rfidcard')
   haml :index
 end
 
@@ -22,7 +22,7 @@ get '/pi/get/temp' do
 end
 
 get '/redis/get/:myparam' do # will be used by the ajax call to refresh last rfidcard read on web page
-  @rfidcard = REDIS.get(params[:myparam])
+  REDIS.get(params[:myparam])
 end
 
 post '/sendout' do
@@ -48,7 +48,7 @@ __END__
       function mywatch() {
        var xmlhttp;
        xmlhttp=new XMLHttpRequest();
-       xmlhttp.open("GET","http://10.16.0.149:9393/redis/get/rfidcard",true);
+       xmlhttp.open("GET","http://10.16.0.149:4567/redis/get/rfidcard",true);
        xmlhttp.send();
        xmlhttp.onreadystatechange=function()
        {
@@ -64,11 +64,12 @@ __END__
        if (dd < 10) { dd = 10 + dd };
        if (mm < 10) { mm = 10 + mm };
        document.getElementById("inputDate").value=( yyyy + "-" + mm + "-" + dd );
+       setTimeout(mywatch,500);
       }
 
 @@index
 .page-header
-  %h1 redis-RFID home
+  %h1 Raspberry Pi redis RFID home
 .container
   .form-horizontal
     %form{:action => "/sendout", :method => "post"}
@@ -93,6 +94,10 @@ __END__
             %span(class="add-on")
               %i(class="icon-time icon-black")
             %input{:type => "textbox", :name => "inputHours", :id => "inputHours", :value => 1 }
+            %button(class="btn btn-small")
+              %i(class="icon-plus icon-black")
+            %button(class="btn btn-small")
+              %i(class="icon-minus icon-black")
       .control-group
         .controls
           %button{:type => "submit", :class => "btn btn-large btn-primary"}
