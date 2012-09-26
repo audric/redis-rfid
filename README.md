@@ -49,5 +49,4 @@ It contains:
 Simple way to start x windows in kiosk mode with chromium.
 
 ## example-ajax.html
-Simple file to show rfidcard refresh with ajax and webdis
-
+Simple file to show rfidcard refresh with ajax and [webdis](https://github.com/nicolasff/webdis)
