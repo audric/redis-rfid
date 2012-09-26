@@ -16,9 +16,10 @@ int main()
         Compile:
             first compile hiredis
             then compile this program and link it with libhiredis.a
-            $cc -o redis-rfid-serial redis-rfid-serial.c libhiredis.a
+            $ cc -o redis-rfid-serial redis-rfid-serial.c libhiredis.a
+            $ strip redis-rfid-serial
         Test with:
-            $redis-cli get rfidcard
+            $ redis-cli get rfidcard
 
         Todo:
         .) publish to git
@@ -58,13 +59,14 @@ int main()
 	RFIDopt.c_cflag |= (CLOCAL | CREAD | CS8);
 	tcsetattr( RFIDfd, TCSANOW, &RFIDopt);
 	fcntl( RFIDfd, F_SETFL, 0);
+	printf("OK: about to initely loop... ctrl-c to end.\n");
 	while(1) {
 	    n = read( RFIDfd, buffer, 255);
 	    buffer[n-1]=0; /* makes the string printable and drop extra first and last char */
 	    strncpy(buffer2,buffer+1,strlen(buffer+1));
-	    printf("OK: ttyUSB0 <= %s (%d)", buffer2, strlen(buffer2));
+//	    printf("OK: ttyUSB0 <= %s (%d)", buffer2, strlen(buffer2));
 	    reply = redisCommand(c,"SET %s %s", "rfidcard", buffer2);
-	    printf(" : REDIS SET: %s\n", reply->str);
+//	    printf(" : REDIS SET: %s\n", reply->str);
 	    freeReplyObject(reply);
 	    read(RFIDfd, buffer, 1); /* drop the extra char sent by the reader */
 	}
