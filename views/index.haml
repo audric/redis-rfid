@@ -33,5 +33,26 @@
           %button{:type => "submit", :class => "btn btn-large btn-primary"}
             Salva!
             %i(class="icon-ok icon-white")
-%h2 Raspberry Pi extra stuff
-%p= @temperature
+:javascript
+  $(mywatch);
+  function mywatch() {
+       var xmlhttp;
+       xmlhttp=new XMLHttpRequest();
+       xmlhttp.open("GET","/redis/get/rfidcard",true);
+       xmlhttp.send();
+       xmlhttp.onreadystatechange=function()
+       {
+         if (xmlhttp.readyState==4 && xmlhttp.status==200)
+         {
+          document.getElementById("inputRFIDcard").value=xmlhttp.responseText;
+         }
+       }
+       var mydate = new Date();
+       var dd   = mydate.getDate();
+       var mm   = mydate.getMonth()+1;
+       var yyyy = mydate.getFullYear();
+       if (dd < 10) { dd = 10 + dd };
+       if (mm < 10) { mm = 10 + mm };
+       document.getElementById("inputDate").value=( yyyy + "-" + mm + "-" + dd );
+       setTimeout(mywatch,1500);
+  }
