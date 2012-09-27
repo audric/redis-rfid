@@ -3,31 +3,18 @@
   %head
     %title Raspberry Pi redis RFID
     %link(rel="stylesheet" href="css/bootstrap.min.css")
-
   %body(style="background-color: white;")
+    .navbar
+      .navbar-inner
+        .brand
+          %a(class="brand") BRAND
+          %u(class="nav")
+            %li
+              %a home
+            %li
+              %a extra
+
     = yield
+
     %script(src="http://code.jquery.com/jquery-latest.js")
     %script(src="js/bootstrap.min.js")
-    :javascript
-      $(mywatch);
-      function mywatch() {
-       var xmlhttp;
-       xmlhttp=new XMLHttpRequest();
-       xmlhttp.open("GET","http://127.0.0.1/redis/get/rfidcard",true);
-       xmlhttp.send();
-       xmlhttp.onreadystatechange=function()
-       {
-         if (xmlhttp.readyState==4 && xmlhttp.status==200)
-         {
-          document.getElementById("inputRFIDcard").value=xmlhttp.responseText;
-         }
-       }
-       var mydate = new Date();
-       var dd   = mydate.getDate();
-       var mm   = mydate.getMonth()+1;
-       var yyyy = mydate.getFullYear();
-       if (dd < 10) { dd = 10 + dd };
-       if (mm < 10) { mm = 10 + mm };
-       document.getElementById("inputDate").value=( yyyy + "-" + mm + "-" + dd );
-       setTimeout(mywatch,500);
-      }

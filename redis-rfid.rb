@@ -13,12 +13,13 @@ end
 
 get '/' do
   @temperature = %x(/opt/vc/bin/vcgencmd measure_temp)
-#  @rfidcard = REDIS.get('rfidcard')
+  @rfidcard = REDIS.get('rfidcard')
   haml :index
 end
 
-get '/pi/get/temp' do
+get '/extra' do
   @temperature = %x(/opt/vc/bin/vcgencmd measure_temp)
+  haml :extra
 end
 
 get '/redis/get/:myparam' do # will be used by the ajax call to refresh last rfidcard read on web page
