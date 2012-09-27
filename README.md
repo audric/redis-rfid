@@ -50,3 +50,12 @@ Simple way to start x windows in kiosk mode with chromium.
 
 ## example-ajax.html
 Simple file to show rfidcard refresh with ajax and [webdis](https://github.com/nicolasff/webdis)
+
+## example-unicorn.init
+The unicorn init.d file i'm using.
+
+## example-rc.local
+The rc.local i'm using
+
+## example-inittab
+The inittab i'm using
